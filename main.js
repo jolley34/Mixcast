@@ -67,6 +67,7 @@ const gridContainer = document.getElementById("grid-container");
 const footer = document.getElementById("footer");
 const shuffleButton = document.getElementById("shuffle-array");
 const audio = new Audio();
+
 let isPlaying = false;
 let currentIndex = 0;
 
@@ -94,17 +95,16 @@ function displaySongs(Tracklist) {
     const imageElement = document.createElement("img");
     imageElement.src = song.image;
 
-    card.appendChild(titleElement);
-    card.appendChild(artistElement);
-    card.appendChild(imageElement);
+    card.append(titleElement);
+    card.append(artistElement);
+    card.append(imageElement);
+    gridContainer.append(card);
 
     card.addEventListener("click", () => {
       footer.style.display = "block";
       currentIndex = index;
       playAudio();
     });
-
-    gridContainer.appendChild(card);
   });
 }
 
