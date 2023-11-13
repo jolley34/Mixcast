@@ -99,9 +99,16 @@ function displaySongs(Tracklist) {
   });
 }
 
+let playbackPosition = 0;
+
 function playAudio() {
   const currentSong = Tracklist[currentIndex];
   audio.src = currentSong.link;
+
+  if (!isPlaying) {
+    audio.currentTime = playbackPosition;
+  }
+
   isPlaying = true;
   playButton.style.display = "none";
   pauseButton.style.display = "block";
@@ -114,6 +121,7 @@ function pauseAudio() {
   isPlaying = false;
   playButton.style.display = "block";
   pauseButton.style.display = "none";
+  playbackPosition = audio.currentTime;
 }
 
 function nextSong() {
@@ -141,6 +149,46 @@ function updateTitle() {
   const artist = document.getElementById("artist");
   artist.textContent = Tracklist[currentIndex].artist;
 }
+
+const progress = document.getElementById("progress");
+
+audio.onloadedmetadata = function () {
+  progress.max = audio.duration;
+
+  const updateProgress = setInterval(() => {
+    progress.value = audio.currentTime;
+
+    let min = Math.floor(audio.duration / 60);
+    let sec = Math.floor(audio.duration % 60);
+
+    let curMin = Math.floor(audio.currentTime / 60);
+    let curSec = Math.floor(audio.currentTime % 60);
+
+    if (sec < 10) {
+      sec = "0" + sec;
+    }
+    if (curSec < 10) {
+      curSec = "0" + curSec;
+    }
+    if (min < 10) {
+      min = "0" + min;
+    }
+    if (curMin < 10) {
+      curMin = "0" + curMin;
+    }
+
+    document.getElementById("end").innerHTML = min + ":" + sec;
+    document.getElementById("start").innerHTML = curMin + ":" + curSec;
+  }, 100);
+
+  audio.onended = function () {
+    clearInterval(updateProgress);
+  };
+};
+
+progress.addEventListener("input", function () {
+  audio.currentTime = progress.value;
+});
 
 playButton.addEventListener("click", playAudio);
 pauseButton.addEventListener("click", pauseAudio);
