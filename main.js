@@ -65,11 +65,20 @@ const prevButton = document.getElementById("prev");
 const nextButton = document.getElementById("next");
 const gridContainer = document.getElementById("grid-container");
 const footer = document.getElementById("footer");
+const shuffleButton = document.getElementById("shuffle-array");
 const audio = new Audio();
 let isPlaying = false;
 let currentIndex = 0;
 
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
 function displaySongs(Tracklist) {
+  shuffleArray(Tracklist);
   gridContainer.innerHTML = "";
 
   Tracklist.forEach((song, index) => {
@@ -186,10 +195,12 @@ audio.onloadedmetadata = function () {
   };
 };
 
-
 const randomButton = document.getElementById("random");
 function playRandomSong() {
-  const randomIndex = Math.floor(Math.random() * Tracklist.length);
+  let randomIndex = Math.floor(Math.random() * Tracklist.length);
+  while (randomIndex === currentIndex) {
+    randomIndex = Math.floor(Math.random() * Tracklist.length);
+  }
   currentIndex = randomIndex;
   playAudio();
 }
@@ -199,13 +210,18 @@ pauseButton.addEventListener("click", pauseAudio);
 nextButton.addEventListener("click", nextSong);
 prevButton.addEventListener("click", prevSong);
 audio.addEventListener("ended", nextSong);
+shuffleButton.addEventListener("click", function () {
+  shuffleArray(Tracklist);
+  displaySongs(Tracklist);
+});
 randomButton.addEventListener("click", function () {
-    playRandomSong();
-    footer.style.display = "block";
+  playRandomSong();
+  footer.style.display = "block";
 });
 
 progress.addEventListener("input", function () {
   audio.currentTime = progress.value;
 });
 
+shuffleArray(Tracklist);
 displaySongs(Tracklist);

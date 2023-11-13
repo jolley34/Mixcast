@@ -8,7 +8,7 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: rgb(46, 48, 58);
+  background-color: rgb(39, 41, 49);
   color: white;
   width: 100vw;
   height: 100vh;
@@ -40,7 +40,7 @@ ul {
 }
 
 li {
-    font-size: 1rem;
+  font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
   color: rgb(255, 255, 255);
@@ -76,15 +76,27 @@ main {
 
 i {
   cursor: pointer;
-  font-size: 1.5rem;
-  color: rgb(255, 255, 255);
+  font-size: 1.25rem;
+  color: white;
 }
 
 button {
+  cursor: pointer;
+  border-radius: 10px;
   border: none;
   color: white;
   background-color: transparent;
 }
+
+.random, .shuffle-array {
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  padding: 0.75rem;
+  background-color: rgb(52, 54, 65);
+}
+
 
 .action {
   padding-top: 1rem;
@@ -97,7 +109,7 @@ button {
 #progress {
   width: 100%;
   -webkit-appearance: none;
-  background: rgb(79, 82, 98);
+  background: rgb(52, 54, 65);
   border-radius: 5px;
 }
 
@@ -142,7 +154,7 @@ p:nth-child(2) {
 footer {
   padding-inline: 4rem;
   width: 100%;
-  background-image: linear-gradient(rgb(46, 48, 58), rgb(68, 71, 86));
+  background-color: rgb(39, 41, 49);
   bottom: 0;
   left: 0;
   position: fixed;
@@ -151,6 +163,7 @@ footer {
 .details {
   display: flex;
   flex-direction: column;
+  padding-bottom: 1rem;
 }
 
 .time-container {
@@ -158,15 +171,15 @@ footer {
 }
 
 #artist {
-  color: rgb(158, 165, 197);
-  font-size: 1rem;
+  color: rgb(188, 188, 188);
+  font-size: 0.75rem;
   font-weight: 200;
 }
 
 #title {
   font-weight: 900;
   color: rgb(255, 255, 255);
-  font-size: 1.25rem;
+  font-size: 0.75rem;
 }
 
 h2 {
@@ -176,24 +189,31 @@ h2 {
   font-weight: 400;
 }
 
-.flex-main {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  padding-bottom: 1rem;
-}
-
 .control-container {
+  justify-content: left;
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .flex {
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
-    display: flex;
-    gap: 2rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+}
+
+.flex-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.repeat-randomise {
+  align-items: center;
+  display: flex;
+  gap: 2rem;
 }
