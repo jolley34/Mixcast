@@ -105,7 +105,7 @@ function playAudio() {
   isPlaying = true;
   playButton.style.display = "none";
   pauseButton.style.display = "block";
-  updateTitle()
+  updateTitle();
   audio.play();
 }
 
@@ -122,7 +122,7 @@ function nextSong() {
     currentIndex = 0;
   }
   playAudio();
-  updateTitle()
+  updateTitle();
 }
 
 function prevSong() {
@@ -131,7 +131,7 @@ function prevSong() {
     currentIndex = Tracklist.length - 1;
   }
   playAudio();
-  updateTitle()
+  updateTitle();
 }
 
 function updateTitle() {
@@ -146,5 +146,6 @@ playButton.addEventListener("click", playAudio);
 pauseButton.addEventListener("click", pauseAudio);
 nextButton.addEventListener("click", nextSong);
 prevButton.addEventListener("click", prevSong);
+audio.addEventListener("ended", nextSong);
 
 displaySongs(Tracklist);

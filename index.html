@@ -3,28 +3,42 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
     <title>The Golden Era</title>
   </head>
   <body>
+    <header>
+        <ul>
+            <a href="index.html">Gems.</a>
+            <li>Listening History</li>
+        </ul>
+        <ul>
+            <li>This is all about the golden years of House Music</li>
+            <li id="random" style="font-weight: 200;">give me a random hit</li>
+        </ul>
+    </header>
     <main>
       <div id="grid-container" class="grid-container"></div>
     </main>
     <footer id="footer" style="display: none">
-      <div class="flex-main">
-        <div class="control-container">
-          <button id="prev"><i class="fas fa-backward"></i></button>
-          <button id="play"><i class="fas fa-play"></i></button>
-          <button id="pause"><i class="fas fa-pause"></i></button>
-          <button id="next"><i class="fas fa-forward"></i></button>
+      <div class="time-container">
+        <div class="time">
+          <span id="start">0:00</span>
+          <span id="end">0:00</span>
         </div>
+        <input type="range" id="progress" value="0" />
+      </div>
+      <div class="flex-main">
         <div class="details">
           <div id="artist"></div>
           <h3 id="title"></h3>
+        </div>
+        <div class="control-container">
+          <button id="prev"><i class="fas fa-backward-step"></i></button>
+          <button id="play"><i class="fas fa-play"></i></button>
+          <button id="pause"><i class="fas fa-pause"></i></button>
+          <button id="next"><i class="fas fa-forward-step"></i></button>
         </div>
       </div>
     </footer>
