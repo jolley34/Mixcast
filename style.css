@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: rgb(39, 41, 49);
+  color: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  padding: 4rem 4rem 2rem 4rem;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+
+main {
+  padding: 2rem 4rem 2rem 4rem;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  height: 80%;
+  border-radius: 15px;
+  background-color: rgb(52, 54, 65);
+}
+
+.card:hover {
+  scale: 1.1;
+  transition: ease-in 0.2s;
+}
+
+i {
+  cursor: pointer;
+  font-size: 2rem;
+  color: rgb(179, 193, 223);
+}
+
+button {
+  border: none;
+  color: white;
+  background-color: transparent;
+}
+
+.action {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+}
+
+#progress {
+  width: 100%;
+  -webkit-appearance: none;
+  background: rgb(79, 82, 98);
+  border-radius: 5px;
+}
+
+.time {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+img {
+  border-radius: 0px 0px 15px 15px;
+  margin-top: 0.5rem;
+  width: 100%;
+  object-fit: cover;
+}
+
+h4 {
+  color: rgb(179, 193, 223);
+  margin-top: 1rem;
+  font-weight: 400;
+}
+
+p {
+  color: rgb(255, 255, 255);
+  position: relative;
+  font-weight: 600;
+}
+
+p:nth-child(1) {
+  padding-top: 0.5rem;
+  padding-inline: 1rem;
+}
+
+p:nth-child(2) {
+  padding-inline: 1rem;
+  font-weight: 200;
+  color: rgb(179, 193, 223);
+}
+
+footer {
+  padding-inline: 4rem;
+  width: 100%;
+  background-color: rgb(39, 41, 49);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+}
+
+.details {
+  padding-inline: 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.time-container {
+  padding-top: 0.5rem;
+  padding-inline: 4rem;
+}
+
+#artist {
+  color: rgb(158, 165, 197);
+  font-size: 1rem;
+  font-weight: 200;
+}
+
+#title {
+  font-weight: 900;
+  color: rgb(255, 255, 255);
+  font-size: 1.25rem;
+}
+
+h2 {
+  cursor: pointer;
+  color: rgb(179, 193, 223);
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.flex-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.control-container {
+  display: flex;
+  gap: 1rem;
+}
