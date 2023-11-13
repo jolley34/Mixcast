@@ -186,14 +186,26 @@ audio.onloadedmetadata = function () {
   };
 };
 
-progress.addEventListener("input", function () {
-  audio.currentTime = progress.value;
-});
+
+const randomButton = document.getElementById("random");
+function playRandomSong() {
+  const randomIndex = Math.floor(Math.random() * Tracklist.length);
+  currentIndex = randomIndex;
+  playAudio();
+}
 
 playButton.addEventListener("click", playAudio);
 pauseButton.addEventListener("click", pauseAudio);
 nextButton.addEventListener("click", nextSong);
 prevButton.addEventListener("click", prevSong);
 audio.addEventListener("ended", nextSong);
+randomButton.addEventListener("click", function () {
+    playRandomSong();
+    footer.style.display = "block";
+});
+
+progress.addEventListener("input", function () {
+  audio.currentTime = progress.value;
+});
 
 displaySongs(Tracklist);
