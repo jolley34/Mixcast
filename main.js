@@ -5,12 +5,14 @@ const Tracklist = [
     image:
       "https://i1.sndcdn.com/artworks-0dd6aca7-307f-4122-88b5-b3493d480b4b-0-t500x500.jpg",
     link: "audio/years.mp3",
+    id: 1,
   },
   {
     title: "Walking Alone ft. Erik Hecht",
     artist: "Dirty South & Those Usual Suspects",
     image: "https://i.scdn.co/image/ab67616d0000b2735864626657091d5c55757c3f",
     link: "audio/walkingalone.mp3",
+    id: 2,
   },
   {
     title: "Titanium ft. Sia (Alesso Remix)",
@@ -18,24 +20,28 @@ const Tracklist = [
     image:
       "https://eng4viet.com/wp-content/uploads/2020/11/bai-hat-titanium.jpg",
     link: "audio/titanium.mp3",
+    id: 3,
   },
   {
     title: "Drowning ft. LAURA V (Avicii Remix)",
     artist: "Armin van Buuren",
     image: "https://i1.sndcdn.com/artworks-1qRbideVmP1N-0-t500x500.png",
     link: "audio/drowning.mp3",
+    id: 4,
   },
   {
     title: "Leave the World Behind ft. Deborah Cox",
     artist: "Axwell, Ingrosso, Angello, Laidback Luke",
     image: "https://i.scdn.co/image/ab67616d0000b2735be2b02a0948b3a6f4dbf087",
     link: "audio/ltwb.mp3",
+    id: 5,
   },
   {
     title: "Every Teardrop Is A Waterfall (Avicii 'Tour' Mix)",
     artist: "Coldplay",
     image: "https://i1.sndcdn.com/artworks-000042478557-58gk8j-t500x500.jpg",
     link: "audio/everyteardrop.mp3",
+    id: 6,
   },
   {
     title: "City Of Dreams ft. Ruben Haze",
@@ -43,12 +49,14 @@ const Tracklist = [
     image:
       "https://i.discogs.com/rktQqBOmkVOLVYx-Bn-wkQLACFfkmRrhqMBLpiko5CI/rs:fit/g:sm/q:90/h:500/w:500/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTM4MzYy/NDYtMTM0NjMxNjk1/OC00NTMzLmpwZWc.jpeg",
     link: "audio/cityofdream.mp3",
+    id: 7,
   },
   {
     title: "Tokyo By Night (Axwell Remix)",
     artist: "Hook N Sling ft. Karin Park",
     image: "https://i1.sndcdn.com/artworks-000077814674-qcu8h4-t500x500.jpg",
     link: "audio/tokyo.mp3",
+    id: 8,
   },
   {
     title: "Echoes",
@@ -56,6 +64,43 @@ const Tracklist = [
     image:
       "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/98/fe/5d/98fe5d4d-9cba-4168-6b3d-b71c0a826528/00602537707430.rgb.jpg/1200x1200bb.jpg",
     link: "audio/echoes.mp3",
+    id: 9,
+  },
+  {
+    title: "Pressure (Alesso Remix)",
+    artist: "Nadia Ali",
+    image: "https://i1.sndcdn.com/artworks-000015219519-9t80kw-t500x500.jpg",
+    link: "audio/pressure.mp3",
+    id: 10,
+  },
+  {
+    title: "The Island (Steve Angello, AN21, Max Vangeli Remix)",
+    artist: "Pendulum",
+    image: "https://i1.sndcdn.com/artworks-KR3mj7Ko2YLE-0-t500x500.jpg",
+    link: "audio/theisland.mp3",
+    id: 11,
+  },
+  {
+    title: "In My Mind (Axwell Radio Edit)",
+    artist: "Ivan Gough & Feenixpawl ft. Georgi Kay",
+    image: "https://i1.sndcdn.com/artworks-000028135929-6r4v8h-t500x500.jpg",
+    link: "audio/inmymind.mp3",
+    id: 12,
+  },
+  {
+    title: "All you need is love",
+    artist: "Avicii",
+    image:
+      "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/63/e5/39/63e53993-0eff-18e2-d756-ce3d56d98270/00602537491377.rgb.jpg/1200x1200bf-60.jpg",
+    link: "audio/allyouneedislove.mp3",
+    id: 13,
+  },
+  {
+    title: "Everyday Of My Life",
+    artist: "Third Party",
+    image: "https://i1.sndcdn.com/artworks-000080626822-7wsi97-t500x500.jpg",
+    link: "audio/everydayofmylife.mp3",
+    id: 14,
   },
 ];
 
@@ -79,7 +124,6 @@ function shuffleArray(array) {
 }
 
 function displaySongs(Tracklist) {
-  shuffleArray(Tracklist);
   gridContainer.innerHTML = "";
 
   Tracklist.forEach((song, index) => {
@@ -223,5 +267,79 @@ progress.addEventListener("input", function () {
   audio.currentTime = progress.value;
 });
 
-shuffleArray(Tracklist);
+// Playlist Section
+const playlist = loadPlaylistFromStorage();
+const favoriteButton = document.getElementById("favorite");
+
+function addToPlaylist() {
+  const currentSong = Tracklist[currentIndex];
+
+  const indexInPlaylist = playlist.findIndex(
+    (song) => song.id === currentSong.id
+  );
+
+  if (indexInPlaylist === -1) {
+    playlist.push(currentSong);
+    alert(`${currentSong.title} added to playlist!`);
+  } else {
+
+    playlist.splice(indexInPlaylist, 1);
+    alert(`${currentSong.title} removed from playlist!`);
+  }
+
+  displayPlaylist(); 
+  savePlaylistToStorage();
+}
+
+function loadPlaylistFromStorage() {
+  const storedPlaylist = localStorage.getItem("playlist");
+  return storedPlaylist ? JSON.parse(storedPlaylist) : [];
+}
+
+function savePlaylistToStorage() {
+  localStorage.setItem("playlist", JSON.stringify(playlist));
+}
+
+function displayPlaylist() {
+  gridContainer.innerHTML = "";
+
+  playlist.forEach((song, index) => {
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const titleElement = document.createElement("p");
+    titleElement.textContent = `${song.title}`;
+
+    const artistElement = document.createElement("p");
+    artistElement.textContent = `${song.artist}`;
+
+    const imageElement = document.createElement("img");
+    imageElement.src = song.image;
+
+    card.append(titleElement);
+    card.append(artistElement);
+    card.append(imageElement);
+    gridContainer.append(card);
+
+    card.addEventListener("click", () => {
+      footer.style.display = "block";
+      currentIndex = Tracklist.findIndex((track) => track.id === song.id);
+      playAudio();
+    });
+  });
+}
+
+const allSongsButton = document.getElementById("all-songs");
+const playlistButton = document.getElementById("playlist");
+
+allSongsButton.addEventListener("click", () => {
+  displaySongs(Tracklist);
+});
+
+playlistButton.addEventListener("click", () => {
+  displayPlaylist();
+});
+
+favoriteButton.addEventListener("click", addToPlaylist);
+
 displaySongs(Tracklist);
