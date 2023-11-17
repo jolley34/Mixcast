@@ -66,10 +66,11 @@ main {
   cursor: pointer;
   height: 80%;
   border-radius: 15px;
+  opacity: 0.8;
 }
 
 .card:hover {
-  scale: 1.05;
+  opacity: 1;
   transition: ease-in 0.2s;
 }
 
