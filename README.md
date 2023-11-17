@@ -7,3 +7,11 @@ This project is about a space where you can find house mixes easy and fast and c
 # Installers
 
 There is no npm installers needed for this one.
+
+# Pages link 
+
+https://jolley34.github.io/Mixcast/
+
+# My repo
+
+https://github.com/jolley34/Mixcast
