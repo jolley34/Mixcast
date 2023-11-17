@@ -104,6 +104,8 @@ const Tracklist = [
   },
 ];
 
+
+// Main section
 const playButton = document.getElementById("play");
 const pauseButton = document.getElementById("pause");
 const prevButton = document.getElementById("prev");
@@ -139,18 +141,30 @@ function displaySongs(Tracklist) {
     const imageElement = document.createElement("img");
     imageElement.src = song.image;
 
-    card.append(titleElement);
-    card.append(artistElement);
-    card.append(imageElement);
-    gridContainer.append(card);
+    const favoriteButton = document.createElement("button");
+    favoriteButton.textContent = isSongInPlaylist(song) ? "Remove from Playlist" : "Add to Playlist";
+    favoriteButton.classList.add("favorite-button");
+    card.appendChild(titleElement);
+    card.appendChild(artistElement);
+    card.appendChild(imageElement);
+    card.appendChild(favoriteButton);
+
+    favoriteButton.addEventListener("click", () => {
+      addToPlaylist(song);
+      displaySongs(Tracklist);
+      displayPlaylist();
+    });
 
     card.addEventListener("click", () => {
       footer.style.display = "block";
       currentIndex = index;
       playAudio();
     });
+
+    gridContainer.appendChild(card);
   });
 }
+
 
 let playbackPosition = 0;
 
@@ -267,27 +281,22 @@ progress.addEventListener("input", function () {
   audio.currentTime = progress.value;
 });
 
+
+
 // Playlist Section
 const playlist = loadPlaylistFromStorage();
-const favoriteButton = document.getElementById("favorite");
 
-function addToPlaylist() {
-  const currentSong = Tracklist[currentIndex];
-
-  const indexInPlaylist = playlist.findIndex(
-    (song) => song.id === currentSong.id
-  );
+function addToPlaylist(song) {
+  const indexInPlaylist = playlist.findIndex((playlistSong) => playlistSong.id === song.id);
 
   if (indexInPlaylist === -1) {
-    playlist.push(currentSong);
-    alert(`${currentSong.title} added to playlist!`);
+    playlist.push(song);
+    alert(`${song.title} added to playlist!`);
   } else {
-
     playlist.splice(indexInPlaylist, 1);
-    alert(`${currentSong.title} removed from playlist!`);
+    alert(`${song.title} removed from playlist!`);
   }
 
-  displayPlaylist(); 
   savePlaylistToStorage();
 }
 
@@ -299,7 +308,6 @@ function loadPlaylistFromStorage() {
 function savePlaylistToStorage() {
   localStorage.setItem("playlist", JSON.stringify(playlist));
 }
-
 function displayPlaylist() {
   gridContainer.innerHTML = "";
 
@@ -316,17 +324,41 @@ function displayPlaylist() {
     const imageElement = document.createElement("img");
     imageElement.src = song.image;
 
-    card.append(titleElement);
-    card.append(artistElement);
-    card.append(imageElement);
-    gridContainer.append(card);
+    const favoriteButton = document.createElement("button");
+    favoriteButton.textContent = "Remove from Playlist";
+    favoriteButton.classList.add("favorite-button");
+    card.appendChild(titleElement);
+    card.appendChild(artistElement);
+    card.appendChild(imageElement);
+    card.appendChild(favoriteButton);
+
+    favoriteButton.addEventListener("click", () => {
+      removeFromPlaylist(song);
+      displayPlaylist(); 
+    });
 
     card.addEventListener("click", () => {
       footer.style.display = "block";
       currentIndex = Tracklist.findIndex((track) => track.id === song.id);
       playAudio();
     });
+
+    gridContainer.appendChild(card);
   });
+}
+
+function removeFromPlaylist(song) {
+  const indexInPlaylist = playlist.findIndex((playlistSong) => playlistSong.id === song.id);
+
+  if (indexInPlaylist !== -1) {
+    playlist.splice(indexInPlaylist, 1);
+    alert(`${song.title} removed from playlist!`);
+    savePlaylistToStorage(); 
+  }
+}
+
+function isSongInPlaylist(song) {
+  return playlist.some((playlistSong) => playlistSong.id === song.id);
 }
 
 const allSongsButton = document.getElementById("all-songs");
@@ -339,7 +371,5 @@ allSongsButton.addEventListener("click", () => {
 playlistButton.addEventListener("click", () => {
   displayPlaylist();
 });
-
-favoriteButton.addEventListener("click", addToPlaylist);
 
 displaySongs(Tracklist);
